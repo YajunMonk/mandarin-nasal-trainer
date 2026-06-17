@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>普通话前后鼻音训练仪</title>
+    <meta
+      name="description"
+      content="面向甘肃口音的普通话前后鼻音专项训练工具，包含拼音、标准朗读、听辨、选择、跟读录音和错题复习。"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231a1d1a'/%3E%3Cpath d='M14 35c8-14 27-16 36-4' fill='none' stroke='%23e0b431' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M18 43c9 5 22 5 31-4' fill='none' stroke='%231a8f76' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="sound-field" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Gansu Mandarin Lab</p>
+          <h1>前后鼻音训练仪</h1>
+        </div>
+        <div class="stats-strip" aria-label="训练统计">
+          <div>
+            <strong id="accuracy">0%</strong>
+            <span>准确率</span>
+          </div>
+          <div>
+            <strong id="streak">0</strong>
+            <span>连对</span>
+          </div>
+          <div>
+            <strong id="mistakeCount">0</strong>
+            <span>错题</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-grid">
+        <aside class="control-panel" aria-label="训练模式">
+          <div class="meter-card">
+            <span class="meter-label">今日目标</span>
+            <div class="meter-track">
+              <div id="dailyBar" class="meter-fill"></div>
+            </div>
+            <strong id="dailyText">0 / 20</strong>
+          </div>
+
+          <nav class="mode-list" id="modeList" aria-label="模式切换"></nav>
+
+          <div class="mouth-panel">
+            <div class="mouth-tabs">
+              <button class="mouth-tab active" data-mouth="front" type="button">-n</button>
+              <button class="mouth-tab" data-mouth="back" type="button">-ng</button>
+            </div>
+            <div class="mouth-diagram" id="mouthDiagram" aria-label="发音位置示意">
+              <span class="tongue"></span>
+              <span class="contact"></span>
+              <span class="airflow"></span>
+            </div>
+            <p id="mouthTip">前鼻音收尾时，舌尖轻抵上齿龈，口腔收得更靠前。</p>
+          </div>
+        </aside>
+
+        <section class="stage" aria-live="polite">
+          <div class="stage-header">
+            <div>
+              <p id="modeKicker" class="eyebrow">Study</p>
+              <h2 id="modeTitle">规律速记</h2>
+            </div>
+            <div class="stage-actions">
+              <button id="shuffleBtn" class="icon-button" type="button" title="换一组">
+                <span aria-hidden="true">↻</span>
+                <span class="sr-only">换一组</span>
+              </button>
+              <button id="resetBtn" class="ghost-button" type="button">重置统计</button>
+            </div>
+          </div>
+          <div id="stageBody" class="stage-body"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="speakIconTemplate">
+      <span class="speak-icon" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
