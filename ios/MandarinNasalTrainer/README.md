@@ -22,3 +22,11 @@ open ios/MandarinNasalTrainer/MandarinNasalTrainer.xcodeproj
 ## 本机限制
 
 当前机器只启用了 Command Line Tools，没有完整 Xcode 和 iOS Simulator。需要安装完整 Xcode 后，才能在模拟器或真机上完成最终运行验证。
+
+可以先运行：
+
+```bash
+bash check-installability.sh
+```
+
+它会检查完整 Xcode、签名证书和连接设备是否已经准备好。
