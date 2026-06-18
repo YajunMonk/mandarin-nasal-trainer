@@ -261,18 +261,21 @@ h3 {
 }
 
 .mouth-tabs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
 }
 
 .mouth-tab {
-  min-height: 40px;
+  min-height: 36px;
+  flex: 1 1 92px;
+  padding: 0 8px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: transparent;
   color: var(--ink);
+  font-size: 13px;
   font-weight: 900;
 }
 
@@ -281,72 +284,23 @@ h3 {
   color: var(--white);
 }
 
-.mouth-diagram {
-  position: relative;
-  height: 120px;
-  overflow: hidden;
+.mouth-photo-frame,
+.rule-visual {
+  margin: 0;
+}
+
+.mouth-photo-frame img,
+.rule-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background:
-    radial-gradient(circle at 28% 28%, rgba(255, 255, 255, 0.78), transparent 28%),
-    linear-gradient(135deg, rgba(37, 95, 133, 0.12), rgba(200, 77, 61, 0.08));
+  background: var(--white);
 }
 
-.mouth-diagram::before {
-  content: "";
-  position: absolute;
-  inset: 22px 18px 32px 42px;
-  border: 3px solid rgba(26, 29, 26, 0.65);
-  border-left: 0;
-  border-radius: 0 80px 80px 0;
-}
-
-.tongue {
-  position: absolute;
-  left: 48px;
-  bottom: 24px;
-  width: 142px;
-  height: 42px;
-  border-radius: 80px 80px 20px 20px;
-  background: var(--front);
-  transform-origin: left bottom;
-  transition: transform 220ms ease, background 220ms ease;
-}
-
-.contact {
-  position: absolute;
-  top: 36px;
-  left: 89px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--gold);
-  box-shadow: 0 0 0 8px rgba(224, 180, 49, 0.18);
-  transition: left 220ms ease, top 220ms ease;
-}
-
-.airflow {
-  position: absolute;
-  top: 50px;
-  right: 28px;
-  width: 54px;
-  height: 16px;
-  border-top: 3px solid rgba(26, 29, 26, 0.36);
-  border-bottom: 3px solid rgba(26, 29, 26, 0.22);
-  border-radius: 999px;
-}
-
-.mouth-diagram.back .tongue {
-  background: var(--back);
-  transform: translateX(26px) rotate(-10deg);
-}
-
-.mouth-diagram.back .contact {
-  left: 159px;
-  top: 31px;
-}
-
-.mouth-panel p {
+.mouth-photo-frame figcaption,
+.rule-visual figcaption {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 14px;
@@ -468,6 +422,43 @@ h3 {
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
+}
+
+.rule-visual {
+  position: relative;
+}
+
+.rule-visual img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.rule-visual figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.front-label,
+.back-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.front-label {
+  background: rgba(26, 143, 118, 0.13);
+  color: #12654f;
+}
+
+.back-label {
+  background: rgba(200, 77, 61, 0.13);
+  color: #883428;
 }
 
 .rule-pairs {

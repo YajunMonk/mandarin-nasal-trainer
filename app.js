@@ -10,6 +10,8 @@ const MODES = [
 const FINAL_GROUPS = [
   {
     id: "an-ang",
+    label: "an / ang",
+    image: "./assets/mouth-an-ang.jpg",
     front: "an",
     back: "ang",
     frontTip: "an 收尾靠前，舌尖抵上齿龈。",
@@ -22,6 +24,8 @@ const FINAL_GROUPS = [
   },
   {
     id: "en-eng",
+    label: "en / eng",
+    image: "./assets/mouth-en-eng.jpg",
     front: "en",
     back: "eng",
     frontTip: "en 发完上下齿更接近，声音更靠前。",
@@ -34,6 +38,8 @@ const FINAL_GROUPS = [
   },
   {
     id: "in-ing",
+    label: "in / ing",
+    image: "./assets/mouth-in-ing.jpg",
     front: "in",
     back: "ing",
     frontTip: "in 收尾舌尖上抬，不要把舌头往后撤。",
@@ -46,6 +52,8 @@ const FINAL_GROUPS = [
   },
   {
     id: "un-ong",
+    label: "un / ong",
+    image: "./assets/mouth-un-ong.jpg",
     front: "un",
     back: "ong",
     frontTip: "un 的 n 要收在前面，别直接滑到 ong。",
@@ -58,6 +66,8 @@ const FINAL_GROUPS = [
   },
   {
     id: "un-iong",
+    label: "ün / iong",
+    image: "./assets/mouth-yun-yong.jpg",
     front: "ün / yun",
     back: "iong / yong",
     frontTip: "云、运、群、军这一类收在前鼻音。",
@@ -192,6 +202,7 @@ const TODAY = new Date().toISOString().slice(0, 10);
 let state = {
   mode: "study",
   familyFilter: "all",
+  mouthGroup: "an-ang",
   currentQuestion: null,
   answered: false,
   mediaRecorder: null,
@@ -212,7 +223,8 @@ const els = {
   dailyText: document.querySelector("#dailyText"),
   shuffleBtn: document.querySelector("#shuffleBtn"),
   resetBtn: document.querySelector("#resetBtn"),
-  mouthDiagram: document.querySelector("#mouthDiagram"),
+  mouthGroupTabs: document.querySelector("#mouthGroupTabs"),
+  mouthImage: document.querySelector("#mouthImage"),
   mouthTip: document.querySelector("#mouthTip")
 };
 
@@ -220,6 +232,7 @@ init();
 
 function init() {
   renderModes();
+  renderMouthPanel();
   renderStats();
   renderStage();
   bindGlobalActions();
@@ -275,16 +288,22 @@ function bindGlobalActions() {
     renderStage();
   });
 
-  document.querySelectorAll(".mouth-tab").forEach((button) => {
+}
+
+function renderMouthPanel() {
+  const group = FINAL_GROUPS.find((item) => item.id === state.mouthGroup) || FINAL_GROUPS[0];
+  els.mouthGroupTabs.innerHTML = FINAL_GROUPS.map((item) => `
+    <button class="mouth-tab ${item.id === group.id ? "active" : ""}" data-mouth-group="${item.id}" type="button">
+      ${item.label}
+    </button>
+  `).join("");
+  els.mouthImage.src = group.image;
+  els.mouthImage.alt = `${group.front} 和 ${group.back} 发音口腔侧面图`;
+  els.mouthTip.textContent = `左图：${group.front} 前鼻音，${group.frontTip} 右图：${group.back} 后鼻音，${group.backTip}`;
+  els.mouthGroupTabs.querySelectorAll("[data-mouth-group]").forEach((button) => {
     button.addEventListener("click", () => {
-      document.querySelectorAll(".mouth-tab").forEach((item) => item.classList.remove("active"));
-      button.classList.add("active");
-      const type = button.dataset.mouth;
-      els.mouthDiagram.classList.toggle("back", type === "back");
-      els.mouthTip.textContent =
-        type === "back"
-          ? "后鼻音收尾时，舌根抬向软腭，声音落点更靠后。"
-          : "前鼻音收尾时，舌尖轻抵上齿龈，口腔收得更靠前。";
+      state.mouthGroup = button.dataset.mouthGroup;
+      renderMouthPanel();
     });
   });
 }
@@ -361,6 +380,13 @@ function renderRuleCard(group) {
         <strong>${group.front} / ${group.back}</strong>
         <span class="tag">${group.id}</span>
       </div>
+      <figure class="rule-visual">
+        <img src="${group.image}" alt="${group.front} 和 ${group.back} 发音口腔侧面图" loading="lazy">
+        <figcaption>
+          <span class="front-label">左：${group.front} / -n</span>
+          <span class="back-label">右：${group.back} / -ng</span>
+        </figcaption>
+      </figure>
       <div class="rule-pairs">
         <button class="sound-chip front" type="button" data-speak="${example[0]}">
           <b>${example[0]}</b><span>${example[1]}</span>
