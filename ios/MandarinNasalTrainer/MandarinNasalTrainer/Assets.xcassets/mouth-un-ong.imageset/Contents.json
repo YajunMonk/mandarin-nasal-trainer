@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "mouth-un-ong.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

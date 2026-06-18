@@ -2,6 +2,11 @@
 
 面向甘肃口音的普通话前后鼻音专项训练 HTML 工具。
 
+现在仓库同时包含两个版本：
+
+- `index.html`：可直接打开或通过 GitHub Pages 使用的网页原型。
+- `ios/MandarinNasalTrainer`：原生 SwiftUI iOS App 工程，包含重做插画、系统朗读、训练、图谱和复盘。
+
 ## 功能
 
 - 常见前后鼻音字词表，全部带拼音。
@@ -25,3 +30,13 @@
 ## 本地运行
 
 直接打开 `index.html` 即可。若要测试录音或语音识别，建议使用本地服务器或 GitHub Pages 的 HTTPS 环境。
+
+## iOS App
+
+用 Xcode 打开：
+
+```bash
+open ios/MandarinNasalTrainer/MandarinNasalTrainer.xcodeproj
+```
+
+当前本机只启用了 Command Line Tools，没有完整 Xcode 和 iOS Simulator。安装完整 Xcode 后即可继续做模拟器/真机运行验证。
